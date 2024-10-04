@@ -1,0 +1,68 @@
+---
+title: "Gráficos del sistema base deR"
+author: "Manuel Céspedes"
+format: html
+---
+
+## Gráficos básicos del sistema base de R
+
+```{r}
+plot(cars)
+```
+
+## Gáficos de la tarea
+
+```{r}
+plot(
+  x = trees$Height,
+  y = trees$Volume,
+  main = "Relación entre altura y volumen de árboles",
+  xlab = "Altura Árbol",
+  ylab = "Volumen Árbol"
+)
+
+```
+## Más gráficos
+```{r}
+# Cantidad  de vehículos con el tipo de motor en V o líneal
+
+Tipo_motor <- 
+  table(mtcars$vs)
+
+# Despliegue
+Tipo_motor
+
+# Gráfico de barras apiladas
+barplot(
+  height = Tipo_motor,
+  main = "Vehículos por tipo de motor",
+  sub = "0: motor en v y 1: motor en línea",
+  xlab = "Tipo de motor",
+  ylab = "Número de vehículos",
+  col = topo.colors(2),
+  
+)
+
+```
+
+```{r}
+# Gráfico de pastel para tipo de motor
+pie(
+  x = Tipo_motor, 
+  main = "Distribución de vehículos por tipo de motor",
+  labels = paste(names(Tipo_motor), ":", Tipo_motor),
+  col = topo.colors(2),
+)
+
+# Histograma de cantidad de sismos por magnitud 
+
+hist(
+  x = quakes$mag, 
+  breaks = 5,
+  main = "Cantidad de sismos por magnitud", 
+  xlab = "Magnitud", 
+  ylab = "Cantidad",
+  col = topo.colors(5),
+)
+```
+
