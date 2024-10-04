@@ -1,12 +1,31 @@
 ---
+#format: html
+#format: docx
+#format: odt
+#format: pptx
 title: "Gráficos del sistema base deR"
+subtitle: "Curso R PF-0953"
+date: "10-03-2024"
 author: "Manuel Céspedes"
-format: html
+format: 
+  html:
+    toc:   true
+theme: yeti
+lang: es
 ---
+```{r}
+
+library(tidyverse)
+library(palmerpenguins)
+```
+
 
 ## Gráficos básicos del sistema base de R
+## echo: false  - Para quitar el código 
 
 ```{r}
+#| label: graficos-dispersion-cars
+#| code-fold: true
 plot(cars)
 ```
 
@@ -64,5 +83,37 @@ hist(
   ylab = "Cantidad",
   col = topo.colors(5),
 )
+```
+## Graifco pinguinos longitud del pico vs masa
+
+```{r}
+#|llabel: "grafico-pinguinos"
+
+# Gráfico de dispersión de longitud del pico vs masa (peso)
+penguins |>
+  ggplot(aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(size = 4) +
+  geom_smooth(method = "loess", se = FALSE) +
+  ggtitle("Longitud del pico vs. masa") +
+  xlab("Longitud del pico (mm)") +
+  ylab("Masa (g)") +
+  labs(color = "Especie", shape = "Especie")
+```
+## Gráfico de pinguinos por especie
+
+```{r}
+#|llabel: "grafico-pinguinos-por-especie"
+
+penguins |>
+  ggplot(aes(x = bill_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species,
+                 shape = species),
+             size = 2) +
+  geom_smooth(method = "lm", se = FALSE, aes(color = species)) +
+  scale_color_manual(values = c("darkorange", "darkorchid", "cyan4")) +
+  ggtitle("Longitud del pico vs. masa por especie") +
+  xlab("Longitud del pico (mm)") +
+  ylab("Masa (g)") +
+  labs(color = "Especie", shape = "Especie")
 ```
 
